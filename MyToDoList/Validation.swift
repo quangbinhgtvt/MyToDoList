@@ -18,7 +18,9 @@ func isValidEmail(email: String) -> Bool {
 
 
 func isValidPass(pass: String) -> Bool {
-    return true
+     let passRegEx = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#.])[A-Za-z\\dd$@$!%*?&#.]{8,}"
+     let passTest = NSPredicate(format: "SELF MATCHES %@", passRegEx)
+     return passTest.evaluate(with: pass)
 }
 
 

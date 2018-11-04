@@ -50,6 +50,15 @@ class SignUpViewController: UIViewController {
             Alert(title: "Invalid Email", message: "Enter a valid email (abc@xyz.com)")
         }
         
+        guard let pass = passwordTextField.text else {return}
+        
+        if isValidPass(pass: pass){
+            
+        }
+        else {
+            Alert(title: "Weak Password", message: "Enter a password with at least 8 characters with at least 1 uppercase, 1 lowercase , 1 number and 1 special character")
+        }
+        
     }
     
     //action form
