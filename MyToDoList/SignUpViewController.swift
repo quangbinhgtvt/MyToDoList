@@ -42,14 +42,6 @@ class SignUpViewController: UIViewController {
     @IBAction func clickSignUpButton(_ sender: Any) {
         guard let email = emailTextField.text else {return}
         
-//        if isValidEmail(email: email){
-//            print("OK")
-//        }
-//        else{
-//            //alert here
-//            Alert(title: "Invalid Email", message: "Enter a valid email (abc@xyz.com)")
-//        }
-        
         guard let pass = passwordTextField.text else {return}
         
         if isValidPass(pass: pass){
@@ -76,10 +68,12 @@ class SignUpViewController: UIViewController {
             }
             }
             
-            guard let user = authResult?.user else {return}
-
-            
+            //guard let user = authResult?.user else {return}
         })
+        //push to Sign In View
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let listViewController = sb.instantiateViewController(withIdentifier: "SignIn")
+        self.present(listViewController,animated: true,completion: nil)
         
     }
     
