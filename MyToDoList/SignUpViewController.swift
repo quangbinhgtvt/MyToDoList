@@ -69,11 +69,12 @@ class SignUpViewController: UIViewController {
             }
             
             //guard let user = authResult?.user else {return}
+            DispatchQueue.main.async {
+                self.moveToListView()
+            }
+            
         })
-        //push to Sign In View
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let listViewController = sb.instantiateViewController(withIdentifier: "SignIn")
-        self.present(listViewController,animated: true,completion: nil)
+      
         
     }
     
@@ -85,4 +86,14 @@ class SignUpViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
 
+    //get Appdelegate to show to List View
+    private func moveToListView(){
+        //get appdelegate
+        let mainSB = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let listView = mainSB.instantiateViewController(withIdentifier: "ListView") as! ListViewController
+        let nav: UINavigationController = UINavigationController(rootViewController: listView)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = nav
+        
+    }
 }

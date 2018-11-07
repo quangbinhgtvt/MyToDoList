@@ -9,16 +9,26 @@
 import UIKit
 import Firebase
 
+let IS_LOGGED_IN : String = "Is Logged To"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         return true
+    }
+    
+    private func checkScreenDisplayLogic(){
+        let userDefaults = UserDefaults.standard
+        if let _ = UserDefaults.value(forKey: IS_LOGGED_IN){
+            // Show viewcontroller you want
+            
+        }
+        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
