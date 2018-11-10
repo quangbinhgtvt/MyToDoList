@@ -9,6 +9,8 @@
 import Foundation
 
 struct List {
-    var tasks : [String] = []
-    var content: String
+    
+    var content: String?
+    var userUid: String?
+    
 }

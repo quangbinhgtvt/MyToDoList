@@ -10,6 +10,11 @@ import UIKit
 
 class listTableViewCell: UITableViewCell {
 
+    
+    @IBOutlet weak var listContent: UILabel!
+    @IBOutlet weak var numberOfTasks: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

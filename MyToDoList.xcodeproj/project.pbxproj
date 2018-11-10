@@ -23,7 +23,7 @@
 		6727EC12218E918D008DD2E9 /* MyToDoListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6727EC11218E918D008DD2E9 /* MyToDoListUITests.swift */; };
 		6727EC20218F0070008DD2E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6727EC1F218F0070008DD2E9 /* GoogleService-Info.plist */; };
 		679D9B962195E9FA001FB053 /* CreateListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679D9B952195E9FA001FB053 /* CreateListViewController.swift */; };
-		84E5D4842193210C00941A56 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5D4832193210C00941A56 /* File.swift */; };
+		84E5D4842193210C00941A56 /* Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5D4832193210C00941A56 /* Lists.swift */; };
 		AC43DFC10C6259712FA21378 /* Pods_MyToDoList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5B79B809E72E00E7A233382 /* Pods_MyToDoList.framework */; };
 		C778D222A15A20B2580DD9AB /* Pods_MyToDoListUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC3D3CBAEC1B1F301184399 /* Pods_MyToDoListUITests.framework */; };
 /* End PBXBuildFile section */
@@ -71,7 +71,7 @@
 		6727EC13218E918D008DD2E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6727EC1F218F0070008DD2E9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		679D9B952195E9FA001FB053 /* CreateListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateListViewController.swift; sourceTree = "<group>"; };
-		84E5D4832193210C00941A56 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		84E5D4832193210C00941A56 /* Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lists.swift; sourceTree = "<group>"; };
 		8B507C6E494D29D38FC4B5A2 /* Pods-MyToDoListTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyToDoListTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyToDoListTests/Pods-MyToDoListTests.release.xcconfig"; sourceTree = "<group>"; };
 		A5B79B809E72E00E7A233382 /* Pods_MyToDoList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyToDoList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1A78D6682B7EE11F2F4E8BA /* Pods-MyToDoListUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyToDoListUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyToDoListUITests/Pods-MyToDoListUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -188,7 +188,7 @@
 		84E5D482219320F200941A56 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				84E5D4832193210C00941A56 /* File.swift */,
+				84E5D4832193210C00941A56 /* Lists.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -470,7 +470,7 @@
 				679D9B962195E9FA001FB053 /* CreateListViewController.swift in Sources */,
 				6710814F2191FA280001CB97 /* listTableViewCell.swift in Sources */,
 				671B138F218F1ABE00766BBA /* SignUpViewController.swift in Sources */,
-				84E5D4842193210C00941A56 /* File.swift in Sources */,
+				84E5D4842193210C00941A56 /* Lists.swift in Sources */,
 				671B1391218F4D7200766BBA /* Validation.swift in Sources */,
 				671B138D218F0F4200766BBA /* SignInViewController.swift in Sources */,
 			);
