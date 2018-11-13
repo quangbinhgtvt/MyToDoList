@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TasksViewController" customModule="MyToDoList" customModuleProvider="target">
+            <connections>
+                <outlet property="TasksTableView" destination="Quf-ia-J9z" id="1Z4-ql-K2F"/>
+                <outlet property="taskWillAdded" destination="M2l-CJ-ChG" id="We4-Mn-qdx"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="TaskVC" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NS2-pj-EzL">
+                    <rect key="frame" x="15" y="40" width="345" height="49"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add a to-do..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M2l-CJ-ChG">
+                            <rect key="frame" x="48" y="11" width="289" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="24"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4b-Dc-YVk">
+                            <rect key="frame" x="10" y="14.5" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="HQR-qG-DZX"/>
+                                <constraint firstAttribute="width" constant="20" id="tQY-PI-oak"/>
+                            </constraints>
+                            <state key="normal" image="ic_plus"/>
+                            <connections>
+                                <action selector="clickAddButton:" destination="-1" eventType="touchUpInside" id="2xt-Tj-1w2"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.27725931274471838" green="0.59093778604793035" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="M4b-Dc-YVk" firstAttribute="leading" secondItem="NS2-pj-EzL" secondAttribute="leading" constant="10" id="aty-gi-hdd"/>
+                        <constraint firstAttribute="height" constant="49" id="dGd-IR-7JI"/>
+                        <constraint firstItem="M4b-Dc-YVk" firstAttribute="centerY" secondItem="NS2-pj-EzL" secondAttribute="centerY" id="zbU-SR-x5U"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Quf-ia-J9z">
+                    <rect key="frame" x="15" y="99" width="345" height="568"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NS2-pj-EzL" secondAttribute="trailing" constant="15" id="7qQ-kr-31S"/>
+                <constraint firstItem="NS2-pj-EzL" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="AbZ-5H-FNo"/>
+                <constraint firstItem="Quf-ia-J9z" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="IaX-sB-3q3"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Quf-ia-J9z" secondAttribute="bottom" id="RJr-7h-uxU"/>
+                <constraint firstItem="Quf-ia-J9z" firstAttribute="top" secondItem="NS2-pj-EzL" secondAttribute="bottom" constant="10" id="UL2-aF-iw9"/>
+                <constraint firstItem="NS2-pj-EzL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="fib-xp-IAb"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Quf-ia-J9z" secondAttribute="trailing" constant="15" id="uvR-Mu-iBj"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="55.200000000000003" y="48.125937031484263"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_plus" width="33" height="33"/>
+    </resources>
+</document>

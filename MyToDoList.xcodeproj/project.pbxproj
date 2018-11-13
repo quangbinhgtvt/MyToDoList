@@ -22,7 +22,12 @@
 		6727EC07218E918D008DD2E9 /* MyToDoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6727EC06218E918D008DD2E9 /* MyToDoListTests.swift */; };
 		6727EC12218E918D008DD2E9 /* MyToDoListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6727EC11218E918D008DD2E9 /* MyToDoListUITests.swift */; };
 		6727EC20218F0070008DD2E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6727EC1F218F0070008DD2E9 /* GoogleService-Info.plist */; };
+		6791571121988B04004B2CAD /* TasksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6791570F21988B04004B2CAD /* TasksTableViewCell.swift */; };
+		6791571221988B04004B2CAD /* TasksTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6791571021988B04004B2CAD /* TasksTableViewCell.xib */; };
 		679D9B962195E9FA001FB053 /* CreateListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679D9B952195E9FA001FB053 /* CreateListViewController.swift */; };
+		847CF2AB2197077900EA64F7 /* FirebaseConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847CF2AA2197077900EA64F7 /* FirebaseConstant.swift */; };
+		847CF2B021971AAF00EA64F7 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847CF2AE21971AAF00EA64F7 /* TasksViewController.swift */; };
+		847CF2B121971AAF00EA64F7 /* TasksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 847CF2AF21971AAF00EA64F7 /* TasksViewController.xib */; };
 		84E5D4842193210C00941A56 /* Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5D4832193210C00941A56 /* Lists.swift */; };
 		AC43DFC10C6259712FA21378 /* Pods_MyToDoList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5B79B809E72E00E7A233382 /* Pods_MyToDoList.framework */; };
 		C778D222A15A20B2580DD9AB /* Pods_MyToDoListUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC3D3CBAEC1B1F301184399 /* Pods_MyToDoListUITests.framework */; };
@@ -70,7 +75,12 @@
 		6727EC11218E918D008DD2E9 /* MyToDoListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoListUITests.swift; sourceTree = "<group>"; };
 		6727EC13218E918D008DD2E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6727EC1F218F0070008DD2E9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		6791570F21988B04004B2CAD /* TasksTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewCell.swift; sourceTree = "<group>"; };
+		6791571021988B04004B2CAD /* TasksTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TasksTableViewCell.xib; sourceTree = "<group>"; };
 		679D9B952195E9FA001FB053 /* CreateListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateListViewController.swift; sourceTree = "<group>"; };
+		847CF2AA2197077900EA64F7 /* FirebaseConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConstant.swift; sourceTree = "<group>"; };
+		847CF2AE21971AAF00EA64F7 /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
+		847CF2AF21971AAF00EA64F7 /* TasksViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TasksViewController.xib; sourceTree = "<group>"; };
 		84E5D4832193210C00941A56 /* Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lists.swift; sourceTree = "<group>"; };
 		8B507C6E494D29D38FC4B5A2 /* Pods-MyToDoListTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyToDoListTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyToDoListTests/Pods-MyToDoListTests.release.xcconfig"; sourceTree = "<group>"; };
 		A5B79B809E72E00E7A233382 /* Pods_MyToDoList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyToDoList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +152,8 @@
 		6727EBF0218E918C008DD2E9 /* MyToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				847CF2AD2197195D00EA64F7 /* TasksViewControler */,
+				847CF2A92197074700EA64F7 /* Common */,
 				679D9B942195E6CB001FB053 /* View Controller */,
 				84E5D482219320F200941A56 /* Model */,
 				6727EBF1218E918C008DD2E9 /* AppDelegate.swift */,
@@ -183,6 +195,25 @@
 				6710814A2191D6980001CB97 /* ListViewController */,
 			);
 			path = "View Controller";
+			sourceTree = "<group>";
+		};
+		847CF2A92197074700EA64F7 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				847CF2AA2197077900EA64F7 /* FirebaseConstant.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		847CF2AD2197195D00EA64F7 /* TasksViewControler */ = {
+			isa = PBXGroup;
+			children = (
+				847CF2AE21971AAF00EA64F7 /* TasksViewController.swift */,
+				847CF2AF21971AAF00EA64F7 /* TasksViewController.xib */,
+				6791570F21988B04004B2CAD /* TasksTableViewCell.swift */,
+				6791571021988B04004B2CAD /* TasksTableViewCell.xib */,
+			);
+			path = TasksViewControler;
 			sourceTree = "<group>";
 		};
 		84E5D482219320F200941A56 /* Model */ = {
@@ -328,7 +359,9 @@
 				671081502191FA280001CB97 /* listTableViewCell.xib in Resources */,
 				6727EC20218F0070008DD2E9 /* GoogleService-Info.plist in Resources */,
 				6727EBF9218E918D008DD2E9 /* Assets.xcassets in Resources */,
+				6791571221988B04004B2CAD /* TasksTableViewCell.xib in Resources */,
 				6727EBF7218E918C008DD2E9 /* Main.storyboard in Resources */,
+				847CF2B121971AAF00EA64F7 /* TasksViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,10 +497,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6791571121988B04004B2CAD /* TasksTableViewCell.swift in Sources */,
 				6727EBF4218E918C008DD2E9 /* ViewController.swift in Sources */,
 				6727EBF2218E918C008DD2E9 /* AppDelegate.swift in Sources */,
+				847CF2B021971AAF00EA64F7 /* TasksViewController.swift in Sources */,
 				6710814C2191D6C60001CB97 /* ListViewController.swift in Sources */,
 				679D9B962195E9FA001FB053 /* CreateListViewController.swift in Sources */,
+				847CF2AB2197077900EA64F7 /* FirebaseConstant.swift in Sources */,
 				6710814F2191FA280001CB97 /* listTableViewCell.swift in Sources */,
 				671B138F218F1ABE00766BBA /* SignUpViewController.swift in Sources */,
 				84E5D4842193210C00941A56 /* Lists.swift in Sources */,

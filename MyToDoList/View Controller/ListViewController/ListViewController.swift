@@ -34,27 +34,25 @@ class ListViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         let userUid = user?.uid
         
        // get data
-        db.collection("Lists").whereField("userUid", isEqualTo: userUid).getDocuments(){
+
+        db.collection(ListsCollection.collectionName).whereField(ListsCollection.Documents.userUid, isEqualTo: userUid).addSnapshotListener{
             (querySnapshot, error) in
-            if let error = error {
-                print(error)
+            self.listContent.removeAll()
+            guard let documents = querySnapshot?.documents else {
+                print("khong lay duoc du lieu")
+                return
             }
-            else
-            {
-                
-                for document in (querySnapshot?.documents)! {
-                    //print document
-                    var li = List()
-                    
-                    li.content = document.get("name") as! String
-                    self.listContent.append(li)
+            for document in documents {
+                var li = List()
+                if let content = document.get(ListsCollection.Documents.content) {
+                    li.content = content as! String
+                    li.ListId = document.documentID
                 }
+                self.listContent.append(li)
             }
-            
             DispatchQueue.main.async {
                 self.listTableView.reloadData()
             }
-            
         }
         
     }
@@ -76,10 +74,12 @@ class ListViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         self.listTableView.register(UINib(nibName:"listTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "listCell")
         //add user image to left bar
         let userImage = UIImage(named: "ic_list")
-        let imageView = UIImageView(image: userImage)
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        imageView.image = userImage
+        imageView.contentMode = .scaleAspectFit
         let logo = UIBarButtonItem(image: userImage, style: UIBarButtonItem.Style.plain, target: self, action: nil)
-//        self.navigationItem.title = " Phan Quang Binh"
         self.navigationItem.leftBarButtonItem = logo
+        
     }
 
     //table func
@@ -96,6 +96,12 @@ class ListViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let tasksVC = TasksViewController(nibName: "TasksViewController", bundle: Bundle.main)
+        tasksVC.listId = listContent[indexPath.row].ListId
+        self.navigationController?.pushViewController(tasksVC, animated: true)
     }
     
     //actions

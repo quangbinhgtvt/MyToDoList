@@ -59,7 +59,7 @@ class CreateListViewController: UIViewController {
                 print("success")
             }
           }
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
         
     }
     
