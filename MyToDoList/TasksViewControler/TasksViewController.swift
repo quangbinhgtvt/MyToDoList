@@ -19,8 +19,8 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     //variable
     var listId: String?
-    var doingTasks: [String] = []
-    var completedTasks: [String] = []
+    var doingTasks: [Tasks] = []
+    var completedTasks: [Tasks] = []
     var db: Firestore!
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -41,12 +41,14 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         db.settings = setting
         //get data
         getTasksData()
+        print(listId)
     }
 
     //customize
     private func customizeTaskView(){
         //register table cell
         self.TasksTableView.register(UINib(nibName: "TasksTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "TaskCell")
+        self.TasksTableView.register(UINib(nibName: "CompletedTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "CompletedCell")
         //
         self.TasksTableView.delegate = self
         self.TasksTableView.dataSource = self
@@ -56,7 +58,34 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     //get data from firestore
     private func getTasksData(){
-        
+        //get data
+        db.collection(TasksCollection.collectionName).whereField(TasksCollection.Documents.listId, isEqualTo: listId).addSnapshotListener{ (querySnapShot, error) in
+            self.doingTasks.removeAll()
+            self.completedTasks.removeAll()
+            guard let tasks = querySnapShot?.documents else {
+                print("khong lay duoc du lieu")
+                return
+            }
+            
+            for task in tasks {
+                var ta = Tasks()
+                if let content = task.get(TasksCollection.Documents.content) {
+                    ta.content = content as! String
+                    ta.listId = task.documentID
+                    self.doingTasks.append(ta)
+                    
+                }else
+                {
+                    print("khong co field content")
+                }
+                
+            }
+            print("tasks is: \(self.doingTasks)")
+            
+            DispatchQueue.main.async {
+                self.TasksTableView.reloadData()
+            }
+        }
     }
     
     //table view func
@@ -65,12 +94,33 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        switch section {
+        case 0:
+            return doingTasks.count
+        case 1:
+            return 1
+        default:
+            return completedTasks.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = TasksTableView.dequeueReusableCell(withIdentifier: "TaskCell") as! TasksTableViewCell
-        return cell
+        
+        switch  indexPath.section {
+        case 0:
+            let cell = TasksTableView.dequeueReusableCell(withIdentifier: "TaskCell") as! TasksTableViewCell
+            cell.taskContentLabel.text = doingTasks[indexPath.row].content
+            return cell
+        case 1:
+            let cell = TasksTableView.dequeueReusableCell(withIdentifier: "CompletedCell") as! CompletedTableViewCell
+            return cell        
+        default:
+            let cell = TasksTableView.dequeueReusableCell(withIdentifier: "TaskCell") as! TasksTableViewCell
+            cell.taskContentLabel.text = completedTasks[indexPath.row].content
+            return cell
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -93,7 +143,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             if let error = error {
                 print (error)
             } else{
-                print(ref?.documentID)
+                //print(ref?.documentID)
             }
         }
         

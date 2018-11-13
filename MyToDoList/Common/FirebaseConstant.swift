@@ -24,6 +24,7 @@ struct TasksCollection {
     struct  Documents {
         static let content = "name"
         static let listId = "listId"
+        static let isSelected = false
         
     }
 }
