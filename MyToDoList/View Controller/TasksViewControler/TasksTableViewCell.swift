@@ -33,6 +33,7 @@ class TasksTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+        tickBoxButton.addTarget(self, action: #selector(self.clickTickBox), for: .touchUpInside)
     }
     
     //customize UIview of tasks cell
@@ -40,5 +41,10 @@ class TasksTableViewCell: UITableViewCell {
         self.taskCellView.layer.borderColor = UIColor.gray.cgColor
         self.taskCellView.layer.borderWidth = 0.3
         
+    }
+    
+    //event
+    @objc func clickTickBox(){
+        didClickTickBox?()
     }
 }
