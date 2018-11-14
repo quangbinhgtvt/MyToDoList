@@ -10,11 +10,15 @@ import UIKit
 import FirebaseFirestore
 import FirebaseAuth
 
+enum TasksSections : Int {
+    case UnfinishedTasks = 0
+    case Expanding
+    case FinishTasks
+}
 class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     //outlets
     @IBOutlet weak var TasksTableView: UITableView!
-    
     @IBOutlet weak var taskWillAdded: UITextField!
     
     //variable
@@ -22,6 +26,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var doingTasks: [Tasks] = []
     var completedTasks: [Tasks] = []
     var db: Firestore!
+    var isExpandingCompletedTask: Bool = true
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -41,7 +46,6 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         db.settings = setting
         //get data
         getTasksData()
-        print(listId)
     }
 
     //customize
@@ -59,7 +63,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     //get data from firestore
     private func getTasksData(){
         //get data
-        db.collection(TasksCollection.collectionName).whereField(TasksCollection.Documents.listId, isEqualTo: listId).addSnapshotListener{ (querySnapShot, error) in
+        db.collection(TasksCollection.collectionName).whereField(TasksCollection.Documents.listId, isEqualTo: listId!).addSnapshotListener{ (querySnapShot, error) in
             self.doingTasks.removeAll()
             self.completedTasks.removeAll()
             guard let tasks = querySnapShot?.documents else {
@@ -70,7 +74,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             for task in tasks {
                 var ta = Tasks()
                 if let content = task.get(TasksCollection.Documents.content) {
-                    ta.content = content as! String
+                    ta.content = content as? String
                     ta.listId = task.documentID
                     self.doingTasks.append(ta)
                     
@@ -95,12 +99,16 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0:
+        case TasksSections.UnfinishedTasks.rawValue:
             return doingTasks.count
-        case 1:
+        case TasksSections.Expanding.rawValue:
             return 1
         default:
-            return completedTasks.count
+            if isExpandingCompletedTask == true {
+                return completedTasks.count
+            } else {
+                return 0
+            }
         }
         
     }
@@ -114,6 +122,18 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             return cell
         case 1:
             let cell = TasksTableView.dequeueReusableCell(withIdentifier: "CompletedCell") as! CompletedTableViewCell
+            if self.isExpandingCompletedTask == true {
+                cell.showCompletedButton.titleLabel?.text = "Commpleted Tasks"
+            }
+            else{
+                cell.showCompletedButton.titleLabel?.text = "Show Commpleted Tasks"
+            }
+            
+            cell.setDidClickCallback {               
+                
+                self.reloadExpandingSection(sections: [TasksSections.Expanding.rawValue,
+                                                      TasksSections.FinishTasks.rawValue])
+            }
             return cell        
         default:
             let cell = TasksTableView.dequeueReusableCell(withIdentifier: "TaskCell") as! TasksTableViewCell
@@ -121,6 +141,15 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             return cell
         }
         
+    }
+    
+    private func reloadExpandingSection(sections: IndexSet) {
+        // set flag, reload
+        isExpandingCompletedTask = !isExpandingCompletedTask
+        
+        DispatchQueue.main.async {
+            self.TasksTableView.reloadSections(sections, with: UITableView.RowAnimation.automatic)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias SelectedTickBoxDidClick = () -> (Bool)
+
 class TasksTableViewCell: UITableViewCell {
 
    //outlets
@@ -19,6 +21,7 @@ class TasksTableViewCell: UITableViewCell {
     //variable
     var isBoxTicked: Bool = false
     var isStarSelected: Bool = false
+    var didClickTickBox: SelectedTickBoxDidClick?
     
     override func awakeFromNib() {
         super.awakeFromNib()

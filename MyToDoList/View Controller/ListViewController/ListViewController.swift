@@ -46,7 +46,7 @@ class ListViewController: UIViewController,UITableViewDelegate, UITableViewDataS
                 var li = List()
                 if let content = document.get(ListsCollection.Documents.content) {
                     li.content = content as! String
-                    li.ListId = document.documentID
+                    li.listId = document.documentID
                 }
                 self.listContent.append(li)
             }
@@ -100,7 +100,7 @@ class ListViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tasksVC = TasksViewController(nibName: "TasksViewController", bundle: Bundle.main)
-        tasksVC.listId = listContent[indexPath.row].ListId
+        tasksVC.listId = listContent[indexPath.row].listId
         self.navigationController?.pushViewController(tasksVC, animated: true)
     }
     

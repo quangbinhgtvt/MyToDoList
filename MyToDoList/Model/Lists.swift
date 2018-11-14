@@ -12,6 +12,6 @@ struct List {
     
     var content: String?
     var userUid: String?
-    var ListId: String?
+    var listId: String?
     
 }
