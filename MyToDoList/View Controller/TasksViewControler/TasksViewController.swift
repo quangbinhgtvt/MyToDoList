@@ -27,6 +27,8 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var completedTasks: [Tasks] = []
     var db: Firestore!
     var isExpandingCompletedTask: Bool = true
+    var isBoxTicked: Bool = false
+    var isFavorited: Bool = false
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -74,9 +76,22 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             for task in tasks {
                 var ta = Tasks()
                 if let content = task.get(TasksCollection.Documents.content) {
+                   
                     ta.content = content as? String
                     ta.listId = task.documentID
-                    self.doingTasks.append(ta)
+                    if let isFav = task.get(TasksCollection.Documents.isFavorited){
+                        ta.isFavorited = (isFav as? Bool)!
+                    }
+                    if let isSel = task.get(TasksCollection.Documents.isSelected) {
+                        ta.isSelected = (isSel as? Bool)!
+                    }
+
+                    if ta.isSelected == false {
+                        self.doingTasks.append(ta)
+                    } else {
+                        self.completedTasks.append(ta)
+                    }
+                    
                     
                 }else
                 {
@@ -166,7 +181,9 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         var ref: DocumentReference? = nil
         ref = db.collection(TasksCollection.collectionName).addDocument(data: [
             TasksCollection.Documents.content : taskName,
-            TasksCollection.Documents.listId : listId
+            TasksCollection.Documents.listId : listId,
+            TasksCollection.Documents.isSelected: false,
+            TasksCollection.Documents.isFavorited: false
         ]){
             error in
             if let error = error {

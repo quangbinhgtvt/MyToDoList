@@ -8,7 +8,8 @@
 
 import UIKit
 
-typealias SelectedTickBoxDidClick = () -> (Bool)
+typealias SelectedTickBoxDidClick = () -> ()
+typealias FavoriteDidClick = () -> ()
 
 class TasksTableViewCell: UITableViewCell {
 
@@ -16,12 +17,13 @@ class TasksTableViewCell: UITableViewCell {
     @IBOutlet weak var taskCellView: UIView!
     @IBOutlet weak var tickBoxButton: UIButton!
     @IBOutlet weak var taskContentLabel: UILabel!    
-    @IBOutlet weak var starButton: UIButton!
+    
+    @IBOutlet weak var favoriteButton: UIButton!
     
     //variable
-    var isBoxTicked: Bool = false
-    var isStarSelected: Bool = false
+    
     var didClickTickBox: SelectedTickBoxDidClick?
+    var didClickFavorite: FavoriteDidClick?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,8 +36,16 @@ class TasksTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
         tickBoxButton.addTarget(self, action: #selector(self.clickTickBox), for: .touchUpInside)
+        favoriteButton.addTarget(self, action: #selector(self.clickFavorite), for: .touchUpInside)
+    }
+    //
+    func setDidClickTickBox(callbackClickTickBox: SelectedTickBoxDidClick?) {
+        self.didClickTickBox = callbackClickTickBox
     }
     
+    func setDidClickFavorite(callbackClickFavorite: FavoriteDidClick?) {
+        self.didClickFavorite = callbackClickFavorite
+    }
     //customize UIview of tasks cell
     private func customizeView(){
         self.taskCellView.layer.borderColor = UIColor.gray.cgColor
@@ -45,6 +55,11 @@ class TasksTableViewCell: UITableViewCell {
     
     //event
     @objc func clickTickBox(){
+    
         didClickTickBox?()
+    }
+    
+    @objc func clickFavorite(){
+        didClickFavorite?()
     }
 }

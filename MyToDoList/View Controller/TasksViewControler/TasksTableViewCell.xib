@@ -68,7 +68,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="starButton" destination="V4m-zT-HYB" id="YX8-gl-xgC"/>
+                <outlet property="favoriteButton" destination="V4m-zT-HYB" id="hdM-pM-Lt0"/>
                 <outlet property="taskCellView" destination="EW2-eV-bve" id="dw1-9B-ENB"/>
                 <outlet property="taskContentLabel" destination="Kst-CV-8fi" id="PQ8-Zt-pDI"/>
                 <outlet property="tickBoxButton" destination="QhC-li-OfB" id="Nis-rC-idr"/>

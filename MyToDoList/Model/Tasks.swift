@@ -12,4 +12,5 @@ struct Tasks {
     var content: String?
     var listId: String?
     var isSelected: Bool = false
+    var isFavorited: Bool = false
 }
