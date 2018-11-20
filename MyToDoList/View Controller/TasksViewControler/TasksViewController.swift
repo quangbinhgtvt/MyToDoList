@@ -47,6 +47,10 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         setting.areTimestampsInSnapshotsEnabled = true
         db.settings = setting
         //get data
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         getTasksData()
     }
 
@@ -132,7 +136,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch  indexPath.section {
-        case 0:
+        case TasksSections.UnfinishedTasks.rawValue:
             let cell = TasksTableView.dequeueReusableCell(withIdentifier: "TaskCell") as! TasksTableViewCell
             cell.taskContentLabel.text = doingTasks[indexPath.row].content
             cell.setDidClickTickBox(){
@@ -140,11 +144,11 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 dcRef.updateData([TasksCollection.Documents.isSelected :  true])
                 cell.tickBoxButton.imageView?.image = UIImage(named: "ic_checked_square")
                 DispatchQueue.main.async {
-                    self.TasksTableView.reloadData()
+                    self.TasksTableView.reloadSections([TasksSections.UnfinishedTasks.rawValue], with: UITableView.RowAnimation.automatic)
                 }
             }
             return cell
-        case 1:
+        case TasksSections.Expanding.rawValue:
             let cell = TasksTableView.dequeueReusableCell(withIdentifier: "CompletedCell") as! CompletedTableViewCell
             if self.isExpandingCompletedTask == true {
                 cell.showCompletedButton.titleLabel?.text = "Commpleted Tasks"
@@ -162,14 +166,16 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         default:
             let cell = TasksTableView.dequeueReusableCell(withIdentifier: "TaskCell") as! TasksTableViewCell
             cell.taskContentLabel.text = completedTasks[indexPath.row].content
+            
             cell.setDidClickTickBox(){
                 let dcRef = self.db.collection(TasksCollection.collectionName).document(self.completedTasks[indexPath.row].taskId!)
                 dcRef.updateData([TasksCollection.Documents.isSelected :  false])
                 cell.tickBoxButton.imageView?.image = UIImage(named: "ic_square")
                 DispatchQueue.main.async {
-                    self.TasksTableView.reloadData()
+                    self.TasksTableView.reloadSections([TasksSections.FinishTasks.rawValue], with: UITableView.RowAnimation.automatic)
                 }
             }
+            
             return cell
         }
         
