@@ -54,8 +54,7 @@ class TasksTableViewCell: UITableViewCell {
     }
     
     //event
-    @objc func clickTickBox(){
-    
+    @objc func clickTickBox(){    
         didClickTickBox?()
     }
     

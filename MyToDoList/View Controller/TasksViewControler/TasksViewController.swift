@@ -78,7 +78,8 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 if let content = task.get(TasksCollection.Documents.content) {
                    
                     ta.content = content as? String
-                    ta.listId = task.documentID
+                    ta.listId = self.listId
+                    ta.taskId = task.documentID
                     if let isFav = task.get(TasksCollection.Documents.isFavorited){
                         ta.isFavorited = (isFav as? Bool)!
                     }
@@ -134,6 +135,14 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         case 0:
             let cell = TasksTableView.dequeueReusableCell(withIdentifier: "TaskCell") as! TasksTableViewCell
             cell.taskContentLabel.text = doingTasks[indexPath.row].content
+            cell.setDidClickTickBox(){
+                let dcRef = self.db.collection(TasksCollection.collectionName).document(self.doingTasks[indexPath.row].taskId!)
+                dcRef.updateData([TasksCollection.Documents.isSelected :  true])
+                cell.tickBoxButton.imageView?.image = UIImage(named: "ic_checked_square")
+                DispatchQueue.main.async {
+                    self.TasksTableView.reloadData()
+                }
+            }
             return cell
         case 1:
             let cell = TasksTableView.dequeueReusableCell(withIdentifier: "CompletedCell") as! CompletedTableViewCell
@@ -153,10 +162,19 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         default:
             let cell = TasksTableView.dequeueReusableCell(withIdentifier: "TaskCell") as! TasksTableViewCell
             cell.taskContentLabel.text = completedTasks[indexPath.row].content
+            cell.setDidClickTickBox(){
+                let dcRef = self.db.collection(TasksCollection.collectionName).document(self.completedTasks[indexPath.row].taskId!)
+                dcRef.updateData([TasksCollection.Documents.isSelected :  false])
+                cell.tickBoxButton.imageView?.image = UIImage(named: "ic_square")
+                DispatchQueue.main.async {
+                    self.TasksTableView.reloadData()
+                }
+            }
             return cell
         }
         
     }
+    
     
     private func reloadExpandingSection(sections: IndexSet) {
         // set flag, reload

@@ -9,7 +9,7 @@
 import Foundation
 
 struct ListsCollection {
-    static let collectionName = "Lists"
+    static let collectionName  = "Lists"
     
     struct Documents {
         static let content = "name"
