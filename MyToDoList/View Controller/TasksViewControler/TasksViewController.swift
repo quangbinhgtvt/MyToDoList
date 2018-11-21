@@ -141,11 +141,12 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             cell.taskContentLabel.text = doingTasks[indexPath.row].content
             cell.setDidClickTickBox(){
                 let dcRef = self.db.collection(TasksCollection.collectionName).document(self.doingTasks[indexPath.row].taskId!)
-                dcRef.updateData([TasksCollection.Documents.isSelected :  true])
-                cell.tickBoxButton.imageView?.image = UIImage(named: "ic_checked_square")                
-                DispatchQueue.main.async {
-                    self.TasksTableView.reloadSections([TasksSections.UnfinishedTasks.rawValue], with: UITableView.RowAnimation.automatic)
-                }
+                dcRef.updateData([TasksCollection.Documents.isSelected :  true], completion: { (error) in
+                    if error != nil {
+                        print(error)}
+                       cell.tickBoxButton.imageView?.image = UIImage(named: "ic_checked_square")
+                })
+       
             }
 
             return cell
@@ -170,11 +171,11 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             cell.setDidClickTickBox(){
                 let dcRef = self.db.collection(TasksCollection.collectionName).document(self.completedTasks[indexPath.row].taskId!)
-                dcRef.updateData([TasksCollection.Documents.isSelected :  false])
+                dcRef.updateData([TasksCollection.Documents.isSelected :  false], completion: { (error) in
+                    print(error)
+                })
                 cell.tickBoxButton.imageView?.image = UIImage(named: "ic_square")
-                DispatchQueue.main.async {
-                    self.TasksTableView.reloadSections([TasksSections.FinishTasks.rawValue], with: UITableView.RowAnimation.automatic)
-                }
+
             }
 
             return cell
