@@ -139,14 +139,15 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         case TasksSections.UnfinishedTasks.rawValue:
             let cell = TasksTableView.dequeueReusableCell(withIdentifier: "TaskCell") as! TasksTableViewCell
             cell.taskContentLabel.text = doingTasks[indexPath.row].content
+            cell.tickBoxButton.imageView?.image = UIImage(named: "ic_square")
             cell.setDidClickTickBox(){
                 let dcRef = self.db.collection(TasksCollection.collectionName).document(self.doingTasks[indexPath.row].taskId!)
-                dcRef.updateData([TasksCollection.Documents.isSelected :  true], completion: { (error) in
+                dcRef.updateData([TasksCollection.Documents.isSelected : true], completion: { (error) in
                     if error != nil {
-                        print(error)}
-                       cell.tickBoxButton.imageView?.image = UIImage(named: "ic_checked_square")
+                        print(error)
+                    }
                 })
-       
+                
             }
 
             return cell
@@ -168,7 +169,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         default:
             let cell = TasksTableView.dequeueReusableCell(withIdentifier: "TaskCell") as! TasksTableViewCell
             cell.taskContentLabel.text = completedTasks[indexPath.row].content
-            
+            cell.tickBoxButton.imageView?.image = UIImage(named: "ic_checked_square")
             cell.setDidClickTickBox(){
                 let dcRef = self.db.collection(TasksCollection.collectionName).document(self.completedTasks[indexPath.row].taskId!)
                 dcRef.updateData([TasksCollection.Documents.isSelected :  false], completion: { (error) in
