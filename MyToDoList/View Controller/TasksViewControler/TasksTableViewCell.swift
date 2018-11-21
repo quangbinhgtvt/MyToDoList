@@ -52,9 +52,11 @@ class TasksTableViewCell: UITableViewCell {
         self.taskCellView.layer.borderWidth = 0.3
         
     }
+    //action
+
     
     //event
-    @objc func clickTickBox(){    
+    @objc func clickTickBox(){
         didClickTickBox?()
     }
     

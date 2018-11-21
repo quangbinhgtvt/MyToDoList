@@ -142,11 +142,12 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             cell.setDidClickTickBox(){
                 let dcRef = self.db.collection(TasksCollection.collectionName).document(self.doingTasks[indexPath.row].taskId!)
                 dcRef.updateData([TasksCollection.Documents.isSelected :  true])
-                cell.tickBoxButton.imageView?.image = UIImage(named: "ic_checked_square")
+                cell.tickBoxButton.imageView?.image = UIImage(named: "ic_checked_square")                
                 DispatchQueue.main.async {
                     self.TasksTableView.reloadSections([TasksSections.UnfinishedTasks.rawValue], with: UITableView.RowAnimation.automatic)
                 }
             }
+
             return cell
         case TasksSections.Expanding.rawValue:
             let cell = TasksTableView.dequeueReusableCell(withIdentifier: "CompletedCell") as! CompletedTableViewCell
@@ -175,7 +176,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     self.TasksTableView.reloadSections([TasksSections.FinishTasks.rawValue], with: UITableView.RowAnimation.automatic)
                 }
             }
-            
+
             return cell
         }
         
